@@ -11,7 +11,7 @@ bool Renderer::initialize(Window& window)
 }
 void Renderer::beginDraw()
 {
-	SDL_SetRenderDrawColor(SDLRenderer, 89, 89, 89, 255);
+	/*SDL_SetRenderDrawColor(SDLRenderer, 89, 89, 89, 255);*/
 	SDL_RenderClear(SDLRenderer);
 }
 void Renderer::drawRect(Rectangle pRect, int R, int G, int B, int A)

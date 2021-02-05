@@ -3,6 +3,7 @@
 #include<SDL_mixer.h>
 #include"Renderer.h"
 #include"Window.h"
+#include"World.h"
 
 #include<vector>
 
@@ -34,7 +35,7 @@ public:
 	void unload();
 
 private:
-
+	World world;
 	bool isRunning;
 	Renderer renderer;
 	Window window;

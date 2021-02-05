@@ -14,7 +14,7 @@ bool Game::initialize()
 }
 void Game::load()
 {
-
+	world.load(&renderer);
 }
 void Game::update()
 {
@@ -25,6 +25,7 @@ void Game::loop()
 	while (isRunning)
 	{
 		renderer.beginDraw();
+		world.draw(&renderer);
 		update();
 		renderer.endDraw();
 	}
