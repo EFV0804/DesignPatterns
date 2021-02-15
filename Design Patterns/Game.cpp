@@ -30,12 +30,9 @@ void Game::loop()
 		renderer.endDraw();
 	}
 }
-void Game::unload()
-{
-
-}
 void Game::close()
 {
+	world.clean();
 	renderer.close();
 	window.close();
 	Mix_CloseAudio();

@@ -8,18 +8,38 @@ void World::load(Renderer* renderer)
 	grass = TileData(1, "grass.bmp", renderer);
 	hill = TileData(3, "hill.bmp", renderer);
 	river = TileData(2, "river.bmp", renderer);
+	end = TileData(1, "end.bmp", renderer);
+	start = TileData(1,"end.bmp", renderer);
 	grid = generate();
 }
-array<array<Tile*, 32>, 24 > World::generate()
+vector <Tile*> World::generate()
 {
 	srand((unsigned int)time(0));
-	array<array<Tile*, 32>, 24 > grid;
+	vector <Tile*> grid;
+	int x = 0;
+	int y = 0;
+	Tile* tile = nullptr;
 
-	for (int i = 0; i < 24; i++)
+	for (int i = 0; i < 32; i++)
 	{
-		for (int j = 0; j < 32; j++)
+		for (int j = 0; j < 24; j++)
 		{
-			grid[i][j] = new Tile(chooseTile(), i, j);
+			if (j == 0 && i == 0)
+			{
+				tile = new Tile(&start, i, j);
+				grid.push_back(tile);
+				currentTile = grid.back();
+			}
+			if (j == 23 && i == 31)
+			{
+				tile = new Tile(&end, i, j);
+				grid.push_back(tile);
+			}
+			else
+			{
+				tile = new Tile(chooseTile(), i, j);
+				grid.push_back(tile);
+			}
 		}
 	}
 	return grid;
@@ -42,11 +62,15 @@ TileData* World::chooseTile()
 void World::draw(Renderer* renderer)
 {
 
-	for (int i = 0;i < 24; ++i)
+	for (int i = 0; i < grid.size(); i++)
 	{
-		for (int j = 0; j < 32; ++j)
-		{
-			grid[i][j]->draw(renderer);
-		}
+		grid.at(i)->draw(renderer);
+	}
+}
+void World::clean()
+{
+	for (auto tile : grid)
+	{
+			delete tile;
 	}
 }
